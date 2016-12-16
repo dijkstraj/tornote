@@ -21,9 +21,18 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"os"
 )
 
 var templates map[string]*template.Template
+
+var funcMap = template.FuncMap {
+	"getenv": getenv,
+}
+
+func getenv(name string) string {
+	return os.Getenv(name)
+}
 
 // Load and compile templates files from bindata.
 func initTemplates() error {
@@ -52,7 +61,7 @@ func initTemplates() error {
 			return err
 		}
 		// Compile layout
-		target, err := template.New(file).Parse(string(layout))
+		target, err := template.New(file).Funcs(funcMap).Parse(string(layout))
 		if err != nil {
 			return err
 		}

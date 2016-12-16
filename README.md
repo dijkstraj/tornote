@@ -27,6 +27,7 @@ $ go get -u github.com/dijkstraj/tornote
 $ cd $GOPATH/src/github.com/dijkstraj/tornote
 $ bower install
 $ make install
+$ export NAME=My Tornote
 $ tornote &
 ```
 
@@ -34,7 +35,7 @@ $ tornote &
 
 ```bash
 $ docker build -t tornote-app .
-$ docker run -p 80:8080 --name tornote tornote-app
+$ docker run -p 80:8080 --name tornote -e "NAME=My Tornote" tornote-app
 ```
 
 ## License
